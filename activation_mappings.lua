@@ -1,8 +1,10 @@
-activation = {
-    ["Keuken detector aanrecht"] = { "Keuken Spots" }
+M {
+    activation = {
+        ["Keuken detector aanrecht"] = { "Keuken Spots" }
+    },
+    timeout = {
+        ["Keuken Spots"] = 2
+    }
 }
 
-timeout = {
-    ["Keuken Spots"] = 2
-}
-
+return M
