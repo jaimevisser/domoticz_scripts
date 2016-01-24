@@ -8,7 +8,7 @@ import domoticz
 # PIR all Slaapkamer groot
 # PIR night Slaapkamer groot
 
-domoticz.log(changed_device)
+domoticz.log("TEST")
 
 if 1:  # to disable set to if 0:
     parts = changed_device.name.split(" ", 2)
