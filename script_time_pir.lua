@@ -12,6 +12,7 @@ function check_device(device, mapping)
     for i, detector in ipairs(mapping) do
         if otherdevices[detector] ~= nil then
             if otherdevices[detector] == "On" then
+                print(device .. " stays on because detector '" .. detector .. "' is still on")
                 return
             end
             local td = utils.timedifference(otherdevices_lastupdate[detector])
