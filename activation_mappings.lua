@@ -1,9 +1,9 @@
 M = {
-    activation = {
-        ["Keuken detector aanrecht"] = { "Keuken Spots" }
-    },
-    timeout = {
-        ["Keuken Spots"] = 2
+    map = {
+        ["Keuken Spots"] = {
+            timeout=2*60,
+            "Keuken detector aanrecht"
+        }
     }
 }
 
