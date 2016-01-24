@@ -1,7 +1,7 @@
 M = {
     map = {
         ["Keuken Spots"] = {
-            timeout=1*60,
+            timeout=30,
             "Keuken detector aanrecht"
         }
     }

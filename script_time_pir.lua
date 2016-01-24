@@ -11,6 +11,7 @@ for device, mapping in pairs(mappings.map) do
 
     for i, detector in ipairs(mapping) do
         if otherdevices[detector] ~= nil then
+            print(detector.." : "..otherdevices[detector])
             local td = utils.timedifference(otherdevices_lastupdate[detector])
             lastupdate = math.min(lastupdate, td)
         else
