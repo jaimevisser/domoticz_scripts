@@ -6,25 +6,29 @@ utils = require('utils')
 
 commandArray = {}
 
-for device, mapping in pairs(mappings.map) do
+function check_device(device, mapping)
     local lastupdate = mapping.timeout * 2
 
     for i, detector in ipairs(mapping) do
         if otherdevices[detector] ~= nil then
-            print(detector.." : "..otherdevices[detector])
+            if otherdevices[detector] == "On" then
+                return
+            end
             local td = utils.timedifference(otherdevices_lastupdate[detector])
             lastupdate = math.min(lastupdate, td)
         else
-            print("Detector '"..detector.."' not found in devices!")
+            print("Detector '" .. detector .. "' not found in devices!")
         end
     end
 
-    print(device.." : last interaction with detectors was "..tostring(lastupdate).." seconds ago")
-
     if (lastupdate > mapping.timeout and lastupdate < (mapping.timeout + 60)) then
         commandArray[device] = 'Off'
-        print(device.." : Timeout reached, turning off after "..tostring(lastupdate).." seconds")
+        print(device .. " : Timeout reached, turning off after " .. tostring(lastupdate) .. " seconds")
     end
+end
+
+for device, mapping in pairs(mappings.map) do
+    check_device(device, mapping)
 end
 
 return commandArray
