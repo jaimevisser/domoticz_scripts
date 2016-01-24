@@ -1,7 +1,11 @@
 -- ingests tables: otherdevices,otherdevices_svalues
 
-commandArray = {}
+package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
+mappings = require('activation_mappings')
 
-for i, v in pairs(otherdevices_svalues) do print(i, v) end
+
+print(mappings.activation)
+
+commandArray = {}
 
 return commandArray
