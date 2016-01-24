@@ -10,7 +10,9 @@ for device, mapping in pairs(mappings.map) do
 
     for i, detector in ipairs(mapping) do
         if otherdevices[detector] ~= nil then
-            lastupdate = min(lastupdate, utils.timedifference(otherdevices_lastupdate[detector]))
+            local td = utils.timedifference(otherdevices_lastupdate[detector])
+            print(tostring(td))
+            lastupdate = min(lastupdate, td)
         else
             print("Detector '"..detector.."' not found in devices!")
         end
