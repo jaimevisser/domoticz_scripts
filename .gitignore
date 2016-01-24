@@ -1,4 +1,3 @@
-domoticz.py
-reloader.py
-script_device_PIRsmarter.py
+script_device_demo.lua
+script_time_demo.lua
 .idea/
