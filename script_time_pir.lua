@@ -12,7 +12,7 @@ for device, mapping in pairs(mappings.map) do
         if otherdevices[detector] ~= nil then
             local td = utils.timedifference(otherdevices_lastupdate[detector])
             print(tostring(td))
-            lastupdate = min(lastupdate, td)
+            lastupdate = math.min(lastupdate, td)
         else
             print("Detector '"..detector.."' not found in devices!")
         end
