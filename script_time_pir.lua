@@ -4,7 +4,7 @@ package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 mappings = require('activation_mappings')
 
 
-for k, v in pairs(mappings.activation) do print(k..":"..v) end
+for k, v in pairs(activation) do print(k..":"..v) end
 
 commandArray = {}
 
