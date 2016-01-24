@@ -1,4 +1,4 @@
-M {
+M = {
     activation = {
         ["Keuken detector aanrecht"] = { "Keuken Spots" }
     },
