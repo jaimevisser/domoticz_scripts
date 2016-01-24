@@ -7,7 +7,7 @@ utils = require('utils')
 commandArray = {}
 
 function check_device(device, mapping)
-    local lastupdate = mapping.timeout * 2
+    local lastupdate = mapping.timeout + 1000
 
     for i, detector in ipairs(mapping) do
         if otherdevices[detector] ~= nil then
