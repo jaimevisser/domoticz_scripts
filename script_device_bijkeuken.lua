@@ -1,9 +1,13 @@
 commandArray = {}
 
 for deviceName, deviceValue in pairs(devicechanged) do
-    print("Device based event fired on '" .. deviceName .. "', value '" .. tostring(deviceValue) .. "'");
     if (deviceName == 'Bijkeuken Deursensor') then
-        print("Deursensor is " .. tostring(deviceValue))
-        commandArray['Bijkeuken Licht'] = deviceValue -- "On" / "Off"
+        print("Device based event fired on '" .. deviceName .. "', value '" .. tostring(deviceValue) .. "'")
+        print("SUN: "..otherdevices_svalues['Weer Centrum - Zon'])
+        if (deviceValue == "On") then
+            commandArray['Bijkeuken Licht'] = "On" -- "On" / "Off"
+        elseif (deviceValue == "Off") then
+            commandArray['Bijkeuken Licht'] = "Off"
+        end
     end
 end
