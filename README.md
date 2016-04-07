@@ -1,7 +1,7 @@
 Scripts I use to do more with my domotics setup. The content of this git goes into domoticz/scripts/lua.
 
 
-Variable scripts receive 6 tables from Domoticz:
+Variable scripts receive this from Domoticz:
 - otherdevices
 - otherdevices_lastupdate
 - otherdevices_svalues
@@ -9,9 +9,13 @@ Variable scripts receive 6 tables from Domoticz:
 - uservariables_lastupdate
 - uservariablechanged
 
-Time scripts receive 5 tables
+Time scripts this:
 - otherdevices
 - otherdevices_lastupdate
 - otherdevices_svalues
 - uservariables
 - uservariables_lastupdate
+
+Device scripts receive this:
+- devicechanged['yourdevicename'] = state
+- devicechanged['svalues'] = svalues string
