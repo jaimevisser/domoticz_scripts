@@ -6,8 +6,6 @@ utils = require('utils')
 
 commandArray = {}
 
-print("SUN: "..otherdevices_svalues['Weer Centrum - Zon'])
-
 function check_device(device, mapping)
     local lastupdate = mapping.timeout + 1000
 
