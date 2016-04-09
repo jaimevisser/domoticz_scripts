@@ -1,7 +1,7 @@
 commandArray = {}
 
 
-print(otherdevices_svalues['Badkamer'])
+print(string.match(otherdevices_svalues['Badkamer'],";.+;"))
 
 
 return commandArray
