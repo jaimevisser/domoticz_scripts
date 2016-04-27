@@ -1,5 +1,7 @@
 -- Reboot at midnight
 
+commandArray = {}
+
 time = os.date("*t")
 print(tostring(time))
 if(time.hour == 12 and time.minute == 45) then
@@ -7,4 +9,4 @@ if(time.hour == 12 and time.minute == 45) then
     os.execute("sudo reboot")
 end
 
-return {}
+return commandArray
