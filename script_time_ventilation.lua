@@ -17,7 +17,7 @@ function get_automode()
     local chtime_v2 = utils.timedifference(otherdevices_lastupdate['Ventilatie stand 2'])
     local chtime_v3 = utils.timedifference(otherdevices_lastupdate['Ventilatie stand 3'])
 
-    if (get_ventilation == tonumber(uservariables['Script instelling ventilatie'])) then
+    if (get_ventilation() == tonumber(uservariables['Script instelling ventilatie'])) then
         return true
     end
 
@@ -27,6 +27,8 @@ function get_automode()
 
     return false
 end
+
+log("current ventilation " .. get_ventilation())
 
 if (not get_automode()) then
     log("manual mode")
