@@ -46,7 +46,7 @@ end
 
 log('wanted: ' .. tostring(wanted_ventilation))
 
-if (not wanted_ventilation == get_ventilation) then
+if (not wanted_ventilation == get_ventilation()) then
     return commandArray
 end
 
