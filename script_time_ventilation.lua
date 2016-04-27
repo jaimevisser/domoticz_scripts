@@ -53,7 +53,7 @@ end
 if (wanted_ventilation == 2) then
     commandArray['Ventilatie stand 2'] = "On"
     commandArray['Ventilatie stand 3'] = "Off"
-elseif (moisture_bathroom == 3) then
+elseif (wanted_ventilation == 3) then
     commandArray['Ventilatie stand 2'] = "Off"
     commandArray['Ventilatie stand 3'] = "On"
 else
