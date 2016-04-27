@@ -28,7 +28,7 @@ function get_automode()
     return false
 end
 
-log("current ventilation " .. get_ventilation())
+log("current ventilation: " .. get_ventilation())
 
 if (not get_automode()) then
     log("manual mode")
@@ -46,7 +46,7 @@ end
 
 log('wanted: ' .. tostring(wanted_ventilation))
 
-if (not wanted_ventilation == get_ventilation()) then
+if (wanted_ventilation == get_ventilation()) then
     return commandArray
 end
 
