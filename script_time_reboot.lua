@@ -3,8 +3,8 @@
 commandArray = {}
 
 time = os.date("*t")
-print(tostring(time.hour))
-if(time.hour == 12 and time.minute == 45) then
+print(tostring(time.minute))
+if(time.hour == 12 and time.minute == 55) then
     print("Nightly reboot!")
     os.execute("sudo reboot")
 end
