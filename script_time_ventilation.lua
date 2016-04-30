@@ -58,6 +58,7 @@ if (wanted_ventilation == get_ventilation()) then
 end
 
 if (wanted_ventilation < get_ventilation() and last_ventilation_change() < minutes(30)) then
+    log("change too recent")
     return commandArray
 end
 
