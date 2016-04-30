@@ -1,5 +1,6 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 utils = require('utils')
+require('functions')
 
 commandArray = {}
 
@@ -13,15 +14,21 @@ function get_ventilation()
     return 0
 end
 
+function last_ventilation_change()
+    local chtime_v2 = sensor('Ventilatie stand 2').lastupdate
+    local chtime_v3 = sensor('Ventilatie stand 3').lastupdate
+
+    return math.min(chtime_v2, chtime_v3)
+end
+
 function get_automode()
-    local chtime_v2 = utils.timedifference(otherdevices_lastupdate['Ventilatie stand 2'])
-    local chtime_v3 = utils.timedifference(otherdevices_lastupdate['Ventilatie stand 3'])
+
 
     if (get_ventilation() == tonumber(uservariables['Script instelling ventilatie'])) then
         return true
     end
 
-    if (math.min(chtime_v2, chtime_v3) > 3600) then
+    if (last_ventilation_change() > hours(1)) then
         return true
     end
 
@@ -40,7 +47,7 @@ local wanted_ventilation = 0
 
 if (moisture_bathroom > 60) then
     wanted_ventilation = 3
-elseif (moisture_bathroom > 55) then
+elseif (moisture_bathroom > 50) then
     wanted_ventilation = 2
 end
 
@@ -49,6 +56,11 @@ log('wanted: ' .. tostring(wanted_ventilation))
 if (wanted_ventilation == get_ventilation()) then
     return commandArray
 end
+
+if (wanted_ventilation < get_ventilation() and last_ventilation_change() < minutes(30)) then
+    return commandArray
+end
+
 
 if (wanted_ventilation == 2) then
     commandArray['Ventilatie stand 2'] = "On"

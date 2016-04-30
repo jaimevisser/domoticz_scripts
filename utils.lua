@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 function M.timedifference(s)
    local year = string.sub(s, 1, 4)
