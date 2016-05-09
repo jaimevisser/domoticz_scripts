@@ -9,10 +9,77 @@ function hours(hours)
     return minutes(hours * 60)
 end
 
-function sensor(sensor)
-    local lastupdate_secs = utils.timedifference(otherdevices_lastupdate[sensor])
+function device(a)
+    return {
+        name = a,
+        lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+    }
+end
+
+function sensor(a)
+    local sensor = device(a)
+
+    return sensor
+end
+
+function sensors(...)
+    local sensors = {}
+
+    for i, v in ipairs(var) do
+        sensors[#sensors] = device(v)
+    end
+
+    local lastupdate = sensors[1].lastupdate
+
+    for i, v in ipairs(sensors) do
+        lastupdate = math.min(lastupdate, v.lastupdate)
+    end
 
     return {
-        lastupdate = lastupdate_secs
+        sensors = sensors,
+        lastupdate = lastupdate
     }
+end
+
+local multiswitch = {
+    __index = function(table, index)
+        if (index == "value") then return table.getvalue() end
+        return rawget(table, index)
+    end,
+    __newindex = function(table, index, value)
+        if (index == "value") then table.setvalue(value) return end
+        return rawset(table, index, value)
+    end
+}
+
+function Multiswitch(devices)
+    local switch = sensors(devices)
+
+    switch.getvalue = function()
+        local value = 0
+        for i, v in ipairs(switch.sensors) do
+            if (otherdevices[v.name] == "On") then
+                value = i
+            end
+        end
+        return value
+    end
+
+    switch.setvalue = function(value)
+        for i, v in ipairs(switch.sensors) do
+            if (otherdevices[v.name] == "On" and not i == value) then
+                commandArray[v.name] = "Off"
+            end
+            if (otherdevices[v.name] == "Off" and i == value) then
+                commandArray[v.name] = "On"
+            end
+        end
+    end
+
+    setmetatable(switch, multiswitch)
+    return switch
+end
+
+function log(s)
+    print("[" .. scriptname .. "] " .. s)
 end
