@@ -5,6 +5,8 @@ scriptname = "VENTILATION"
 
 commandArray = {}
 
+log("Starting")
+
 local ventilation = Multiswitch({
     [2] = 'Ventilatie stand 2',
     [3] = 'Ventilatie stand 3'
