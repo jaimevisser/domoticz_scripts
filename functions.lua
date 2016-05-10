@@ -9,21 +9,26 @@ function hours(hours)
     return minutes(hours * 60)
 end
 
-function device(a)
+function Device(a)
     return {
         name = a,
         lastupdate = utils.timedifference(otherdevices_lastupdate[a])
     }
 end
 
-function sensor(a)
-    local sensor = device(a)
+function Sensor(a)
+    local sensor = Device(a)
 
     return sensor
 end
 
-function sensors(sensors)
+function Sensors(devices)
     local lastupdate
+    local sensors = {}
+
+    for i, v in ipairs(sensors) do
+        sensors[i] = Sensor(v)
+    end
 
     for i, v in ipairs(sensors) do
         if (lastupdate == nil) then
@@ -51,7 +56,7 @@ local multiswitch = {
 }
 
 function Multiswitch(devices)
-    local switch = sensors(devices)
+    local switch = Sensors(devices)
 
     switch.getvalue = function()
         local value = 0
