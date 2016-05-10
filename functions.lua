@@ -22,17 +22,15 @@ function sensor(a)
     return sensor
 end
 
-function sensors(...)
-    local sensors = {}
-
-    for i, v in ipairs(arg) do
-        sensors[#sensors] = device(v)
-    end
-
-    local lastupdate = sensors[1].lastupdate
+function sensors(sensors)
+    local lastupdate
 
     for i, v in ipairs(sensors) do
-        lastupdate = math.min(lastupdate, v.lastupdate)
+        if (lastupdate == nil) then
+            lastupdate = v.lastupdate
+        else
+            lastupdate = math.min(lastupdate, v.lastupdate)
+        end
     end
 
     return {
