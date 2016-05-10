@@ -36,12 +36,12 @@ function Sensors(devices)
 
     log("creating a Sensors collection (" .. tostring(#devices) .. ")")
 
-    for i, v in ipairs(devices) do
+    for i, v in pairs(devices) do
         log("adding device " .. v)
         sensors[i] = Sensor(v)
     end
 
-    for i, v in ipairs(sensors) do
+    for i, v in pairs(sensors) do
         if (lastupdate == nil) then
             lastupdate = v.lastupdate
         else
@@ -72,7 +72,7 @@ function Multiswitch(devices)
 
     switch.getvalue = function()
         local value = 0
-        for i, v in ipairs(switch.sensors) do
+        for i, v in pairs(switch.sensors) do
             if (otherdevices[v.name] == "On") then
                 value = i
             end
@@ -81,7 +81,7 @@ function Multiswitch(devices)
     end
 
     switch.setvalue = function(value)
-        for i, v in ipairs(switch.sensors) do
+        for i, v in pairs(switch.sensors) do
             if (otherdevices[v.name] == "On" and not i == value) then
                 commandArray[v.name] = "Off"
             end
