@@ -25,7 +25,7 @@ end
 function sensors(...)
     local sensors = {}
 
-    for i, v in ipairs(var) do
+    for i, v in ipairs(arg) do
         sensors[#sensors] = device(v)
     end
 
