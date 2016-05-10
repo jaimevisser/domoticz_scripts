@@ -16,7 +16,7 @@ end
 function Device(a)
     local lastupdate = utils.timedifference(otherdevices_lastupdate[a])
 
-    log("device created: " .. a .. " lastupdate " .. lastupdate)
+    log("device created: " .. a .. " lastupdate " .. tostring(lastupdate))
 
     return {
         name = a,
@@ -35,6 +35,7 @@ function Sensors(devices)
     local sensors = {}
 
     for i, v in ipairs(devices) do
+        log("adding device "..v)
         sensors[i] = Sensor(v)
     end
 
