@@ -1,6 +1,10 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 utils = require('utils')
 
+function log(s)
+    print("[" .. scriptname .. "] " .. s)
+end
+
 function minutes(minutes)
     return minutes * 60
 end
@@ -10,9 +14,13 @@ function hours(hours)
 end
 
 function Device(a)
+    local lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+
+    log("device created: " .. a .. " lastupdate " .. lastupdate)
+
     return {
         name = a,
-        lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+        lastupdate = lastupdate
     }
 end
 
@@ -26,7 +34,7 @@ function Sensors(devices)
     local lastupdate
     local sensors = {}
 
-    for i, v in ipairs(sensors) do
+    for i, v in ipairs(devices) do
         sensors[i] = Sensor(v)
     end
 
@@ -81,8 +89,4 @@ function Multiswitch(devices)
 
     setmetatable(switch, multiswitch)
     return switch
-end
-
-function log(s)
-    print("[" .. scriptname .. "] " .. s)
 end
