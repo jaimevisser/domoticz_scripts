@@ -64,6 +64,7 @@ local multiswitch = {
 }
 
 function Multiswitch(devices)
+    log("Creating a multiswitch device")
     local switch = Sensors(devices)
 
     switch.getvalue = function()
