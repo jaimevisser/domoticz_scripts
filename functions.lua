@@ -34,8 +34,10 @@ function Sensors(devices)
     local lastupdate
     local sensors = {}
 
+    log("creating a Sensors collection (" .. tostring(#devices) .. ")")
+
     for i, v in ipairs(devices) do
-        log("adding device "..v)
+        log("adding device " .. v)
         sensors[i] = Sensor(v)
     end
 
