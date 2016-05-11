@@ -61,6 +61,7 @@ local multiswitch = {
         return rawget(table, index)
     end,
     __newindex = function(table, index, value)
+        log("setting: " .. index .. " to " .. value)
         if (index == "value") then table.setvalue(value) return end
         return rawset(table, index, value)
     end
@@ -81,6 +82,7 @@ function Multiswitch(devices)
     end
 
     switch.setvalue = function(value)
+        log("setting multiswitch value to "..value)
         for i, v in pairs(switch.sensors) do
             if (otherdevices[v.name] == "On" and not i == value) then
                 commandArray[v.name] = "Off"
