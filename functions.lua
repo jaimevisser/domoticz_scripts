@@ -16,8 +16,6 @@ end
 function Device(a)
     local lastupdate = utils.timedifference(otherdevices_lastupdate[a])
 
-    log("device created: " .. a .. " lastupdate " .. tostring(lastupdate))
-
     return {
         name = a,
         lastupdate = lastupdate
@@ -34,10 +32,7 @@ function Sensors(devices)
     local lastupdate
     local sensors = {}
 
-    log("creating a Sensors collection")
-
     for i, v in pairs(devices) do
-        log("adding device " .. v)
         sensors[i] = Sensor(v)
     end
 
@@ -61,14 +56,12 @@ local multiswitch = {
         return rawget(table, index)
     end,
     __newindex = function(table, index, value)
-        log("setting: " .. index .. " to " .. value)
         if (index == "value") then table.setvalue(value) return end
         return rawset(table, index, value)
     end
 }
 
 function Multiswitch(devices)
-    log("Creating a multiswitch device")
     local switch = Sensors(devices)
 
     switch.getvalue = function()
@@ -82,15 +75,11 @@ function Multiswitch(devices)
     end
 
     switch.setvalue = function(value)
-        log("setting multiswitch value to " .. type(value) .. ":" .. value)
         for i, v in pairs(switch.sensors) do
-            log("  " .. type(i) .. ":" .. tostring(i) .. " - " .. v.name .. " - " .. type(otherdevices[v.name]) .. ":" .. otherdevices[v.name])
             if (otherdevices[v.name] == "On" and i ~= value) then
-                log("  OFF")
                 commandArray[v.name] = "Off"
             end
             if (otherdevices[v.name] == "Off" and i == value) then
-                log("  ON")
                 commandArray[v.name] = "On"
             end
         end
