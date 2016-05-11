@@ -27,9 +27,9 @@ function Sensor(a)
 
     sensor.value = {}
 
-    log("sensor "..a.." - "..otherdevices_svalues[a])
+    log("sensor " .. a .. " - " .. otherdevices_svalues[a])
     string.gsub(otherdevices_svalues[a], "([0-9.]+)", function(s)
-        log("sensor value: " .. s)
+        log("sensor value: " .. type(s) .. ":" .. s)
         sensor.value[#sensor.value] = s
         return s
     end)
