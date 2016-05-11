@@ -27,7 +27,7 @@ local wanted_ventilation = 0
 
 if (moisture_bathroom > 60) then
     wanted_ventilation = 3
-elseif (moisture_bathroom > 50) then
+elseif (moisture_bathroom > 55) then
     wanted_ventilation = 2
 end
 
@@ -47,5 +47,7 @@ ventilation.value = wanted_ventilation
 commandArray['Variable:Script instelling ventilatie'] = tostring(wanted_ventilation)
 
 log('changed to ' .. wanted_ventilation)
+
+for k, v in pairs(commandArray) do log("commandArray[" .. k .. "] " .. v) end
 
 return commandArray
