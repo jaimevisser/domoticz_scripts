@@ -11,6 +11,7 @@ local ventilation = Multiswitch({
     [2] = 'Ventilatie stand 2',
     [3] = 'Ventilatie stand 3'
 })
+local m_bathroom = Sensor('Badkamer')
 
 local automatic = (ventilation.value == tonumber(uservariables['Script instelling ventilatie'])) or
         (ventilation.lastupdate > hours(1))

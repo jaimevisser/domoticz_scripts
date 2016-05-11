@@ -25,15 +25,24 @@ end
 function Sensor(a)
     local sensor = Device(a)
 
+    sensor.value = {}
+
+    string.gsub(otherdevices_svalues[a], ";(.+);", function(s)
+        log("sensor value: " .. s)
+        sensor.value[#sensor.value] = s
+        return s
+    end)
+
+
     return sensor
 end
 
-function Sensors(devices)
+function MultiDevice(devices, builder)
     local lastupdate
     local sensors = {}
 
     for i, v in pairs(devices) do
-        sensors[i] = Sensor(v)
+        sensors[i] = builder(v)
     end
 
     for i, v in pairs(sensors) do
@@ -62,7 +71,7 @@ local multiswitch = {
 }
 
 function Multiswitch(devices)
-    local switch = Sensors(devices)
+    local switch = MultiDevice(devices, Device)
 
     switch.getvalue = function()
         local value = 0
