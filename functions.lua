@@ -82,9 +82,9 @@ function Multiswitch(devices)
     end
 
     switch.setvalue = function(value)
-        log("setting multiswitch value to " .. value)
+        log("setting multiswitch value to " .. type(value) .. ":" .. value)
         for i, v in pairs(switch.sensors) do
-            log("  " .. tostring(i) .. " - " .. v.name .. " - " .. otherdevices[v.name])
+            log("  " .. type(i) .. ":" .. tostring(i) .. " - " .. v.name .. " - " .. otherdevices[v.name])
             if (otherdevices[v.name] == "On" and not i == value) then
                 log("  OFF")
                 commandArray[v.name] = "Off"
