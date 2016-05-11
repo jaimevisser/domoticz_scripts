@@ -86,9 +86,11 @@ function Multiswitch(devices)
         for i, v in pairs(switch.sensors) do
             log("  " .. tostring(i) .. " - " .. v.name .. " - " .. otherdevices[v.name])
             if (otherdevices[v.name] == "On" and not i == value) then
+                log("  OFF")
                 commandArray[v.name] = "Off"
             end
             if (otherdevices[v.name] == "Off" and i == value) then
+                log("  ON")
                 commandArray[v.name] = "On"
             end
         end
