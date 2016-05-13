@@ -34,9 +34,9 @@ end
 
 local wanted_ventilation = 0
 
-if (moisture_bathroom > moisture_bathroom.value[2]) then
+if (moisture_bathroom.value[2] > 60) then
     wanted_ventilation = 3
-elseif (moisture_bathroom > moisture_bathroom.value[2]) then
+elseif (moisture_bathroom.value[2] > 55) then
     wanted_ventilation = 2
 end
 
