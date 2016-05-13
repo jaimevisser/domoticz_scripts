@@ -22,7 +22,7 @@ end)
 
 for k, v in pairs(moisture_bathroom.value) do log("moisture sensor[" .. k .. "] " .. v) end
 
-log("current ventilation: " .. ventilation.value)
+log("current ventilation: " .. ventilation.value .. " - " .. var_setting.value)
 
 local automatic = (ventilation.value == var_setting.value) or
         (ventilation.lastupdate > hours(1))
