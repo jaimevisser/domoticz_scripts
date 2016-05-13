@@ -38,6 +38,8 @@ if (moisture_bathroom.value[2] > 60) then
     wanted_ventilation = 3
 elseif (moisture_bathroom.value[2] > 55) then
     wanted_ventilation = 2
+elseif ((moisture_bathroom.value[1] > 23)) then
+    wanted_ventilation = 3
 end
 
 log('wanted: ' .. tostring(wanted_ventilation))
