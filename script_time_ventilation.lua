@@ -14,11 +14,8 @@ local ventilation = Multiswitch({
 })
 
 local moisture_bathroom = Sensor('Badkamer')
-
 local var_setting = Uservar('Script instelling ventilatie')
-
 local var_m_long = Uservar('Vochtgemiddelde badkamer lang')
-
 local var_m_short = Uservar('Vochtgemiddelde badkamer kort')
 
 every(hours(1), function()
@@ -44,10 +41,13 @@ local wanted_ventilation = 0
 
 if (moisture_bathroom.value[2] > 60) then
     wanted_ventilation = 3
-elseif (moisture_bathroom.value[2] > 55) then
-    wanted_ventilation = 2
+    log("It's very moist")
 elseif ((moisture_bathroom.value[1] > 23)) then
+    log("It's hot")
     wanted_ventilation = 3
+elseif (moisture_bathroom.value[2] > 55) then
+    log("It's moist")
+    wanted_ventilation = 2
 end
 
 log('wanted: ' .. tostring(wanted_ventilation))
