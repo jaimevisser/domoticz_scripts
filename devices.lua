@@ -23,8 +23,8 @@ function Sensor(a)
     log("sensor " .. a .. " - " .. otherdevices_svalues[a])
     string.gsub(otherdevices_svalues[a], "([0-9.]+)", function(s)
         log("sensor value: " .. type(s) .. ":" .. s)
-        sensor.value[i] = s
-        i = i+1
+        sensor.value[i] = tonumber(s)
+        i = i + 1
         return s
     end)
 
@@ -56,15 +56,15 @@ end
 
 function Multiswitch(devices)
     local multiswitch = {
-    __index = function(table, index)
-        if (index == "value") then return table.getvalue() end
-        return rawget(table, index)
-    end,
-    __newindex = function(table, index, value)
-        if (index == "value") then table.setvalue(value) return end
-        return rawset(table, index, value)
-    end
-}
+        __index = function(table, index)
+            if (index == "value") then return table.getvalue() end
+            return rawget(table, index)
+        end,
+        __newindex = function(table, index, value)
+            if (index == "value") then table.setvalue(value) return end
+            return rawset(table, index, value)
+        end
+    }
 
     local switch = MultiDevice(devices, Device)
 
@@ -98,13 +98,13 @@ function Uservar(var, conversion)
 
     local uservar = {
         __index = function(table, index)
-        if (index == "value") then return table.getvalue() end
-        return rawget(table, index)
-    end,
-    __newindex = function(table, index, value)
-        if (index == "value") then table.setvalue(value) return end
-        return rawset(table, index, value)
-    end
+            if (index == "value") then return table.getvalue() end
+            return rawget(table, index)
+        end,
+        __newindex = function(table, index, value)
+            if (index == "value") then table.setvalue(value) return end
+            return rawset(table, index, value)
+        end
     }
 
     local vartable = {
@@ -113,7 +113,7 @@ function Uservar(var, conversion)
             return conversion(uservariables[var])
         end,
         setvalue = function(value)
-            commandArray['Variable:'..var] = tostring(value)
+            commandArray['Variable:' .. var] = tostring(value)
         end
     }
 
