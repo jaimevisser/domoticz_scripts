@@ -25,7 +25,7 @@ every(hours(1), function()
     var_m_long.value = var_m_long.value * .90 + moisture_bathroom.value[2] * .10
 end)
 
-var_m_short.value = var_m_short.value * .90 + var_m_short.value[2] * .10
+var_m_short.value = var_m_short.value * .90 + moisture_bathroom.value[2] * .10
 
 
 for k, v in pairs(moisture_bathroom.value) do log("moisture sensor[" .. k .. "] " .. v) end
