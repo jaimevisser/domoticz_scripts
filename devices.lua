@@ -16,13 +16,15 @@ end
 
 function Sensor(a)
     local sensor = Device(a)
+    local i = 1
 
     sensor.value = {}
 
     log("sensor " .. a .. " - " .. otherdevices_svalues[a])
     string.gsub(otherdevices_svalues[a], "([0-9.]+)", function(s)
         log("sensor value: " .. type(s) .. ":" .. s)
-        sensor.value[#sensor.value] = s
+        sensor.value[i] = s
+        i = i+1
         return s
     end)
 
