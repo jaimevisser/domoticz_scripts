@@ -22,8 +22,10 @@ local var_m_long = Uservar('Vochtgemiddelde badkamer lang')
 local var_m_short = Uservar('Vochtgemiddelde badkamer kort')
 
 every(hours(1), function()
-    var_m_long.value = var_m_long.value * .75 + moisture_bathroom.value[2] * .25
+    var_m_long.value = var_m_long.value * .90 + moisture_bathroom.value[2] * .10
 end)
+
+
 
 for k, v in pairs(moisture_bathroom.value) do log("moisture sensor[" .. k .. "] " .. v) end
 
