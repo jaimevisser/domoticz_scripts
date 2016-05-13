@@ -20,9 +20,7 @@ function Sensor(a)
 
     sensor.value = {}
 
-    log("sensor " .. a .. " - " .. otherdevices_svalues[a])
     string.gsub(otherdevices_svalues[a], "([0-9.]+)", function(s)
-        log("sensor value: " .. type(s) .. ":" .. s)
         sensor.value[i] = tonumber(s)
         i = i + 1
         return s
