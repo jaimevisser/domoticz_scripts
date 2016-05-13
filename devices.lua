@@ -5,14 +5,6 @@ function log(s)
     print("[" .. scriptname .. "] " .. s)
 end
 
-function minutes(minutes)
-    return minutes * 60
-end
-
-function hours(hours)
-    return minutes(hours * 60)
-end
-
 function Device(a)
     local lastupdate = utils.timedifference(otherdevices_lastupdate[a])
 
@@ -60,7 +52,8 @@ function MultiDevice(devices, builder)
     }
 end
 
-local multiswitch = {
+function Multiswitch(devices)
+    local multiswitch = {
     __index = function(table, index)
         if (index == "value") then return table.getvalue() end
         return rawget(table, index)
@@ -71,7 +64,6 @@ local multiswitch = {
     end
 }
 
-function Multiswitch(devices)
     local switch = MultiDevice(devices, Device)
 
     switch.getvalue = function()
@@ -97,4 +89,29 @@ function Multiswitch(devices)
 
     setmetatable(switch, multiswitch)
     return switch
+end
+
+function Uservar(var, conversion)
+    conversion = conversion or tonumber
+
+    local uservar = {
+        __index = function(table, index)
+        if (index == "value") then return table.getvalue() end
+        return rawget(table, index)
+    end,
+    __newindex = function(table, index, value)
+        if (index == "value") then table.setvalue(value) return end
+        return rawset(table, index, value)
+    end
+    }
+
+    return {
+        name = var,
+        getvalue = function()
+            return conversion(uservariables[var])
+        end,
+        setvalue = function(value)
+            commandArray['Variable:'..var] = tostring(value)
+        end
+    }
 end
