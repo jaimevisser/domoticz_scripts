@@ -105,7 +105,7 @@ function Uservar(var, conversion)
     end
     }
 
-    return {
+    local vartable = {
         name = var,
         getvalue = function()
             return conversion(uservariables[var])
@@ -114,4 +114,7 @@ function Uservar(var, conversion)
             commandArray['Variable:'..var] = tostring(value)
         end
     }
+
+    setmetatable(vartable, uservar)
+    return vartable
 end
