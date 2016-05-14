@@ -4,6 +4,8 @@ require('devices')
 require('time')
 scriptname = "BATHROOM DETECTOR"
 
+commandArray = {}
+
 local detector = Switch("Badkamer detector")
 local lights = Switch("Badkamer Licht")
 
@@ -13,3 +15,5 @@ onChange(detector, function()
         lights.turnOn()
     end
 end)
+
+return commandArray
