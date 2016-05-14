@@ -41,7 +41,7 @@ local wanted_ventilation = 0
 if (moisture_bathroom.value[2] > 60) then
     wanted_ventilation = 3
     log("It's very moist")
-elseif ((moisture_bathroom.value[1] > 23)) then
+elseif ((moisture_bathroom.value[1] > 24)) then
     log("It's hot (" .. tostring(moisture_bathroom.value[1]) .. "C)")
     wanted_ventilation = 3
 elseif (moisture_bathroom.value[2] > 55) then
