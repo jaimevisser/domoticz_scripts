@@ -5,9 +5,11 @@ require('time')
 scriptname = "BATHROOM DETECTOR"
 
 local detector = Switch("Badkamer detector")
+local lights = Switch("Badkamer Licht")
 
-onChange(detector,function()
+onChange(detector, function()
     log("change")
-
-
+    if (detector.on) then
+        lights.turnOn()
+    end
 end)

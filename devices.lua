@@ -11,7 +11,11 @@ function log(s)
 end
 
 function onChange(device, f)
-
+    for deviceName, deviceValue in pairs(devicechanged) do
+        if (deviceName == device.name) then
+            f()
+        end
+    end
 end
 
 function Device(a)
