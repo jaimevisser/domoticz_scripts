@@ -1,8 +1,17 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 utils = require('utils')
 
+State = {
+    on = "On",
+    off = "Off"
+}
+
 function log(s)
     print("[" .. scriptname .. "] " .. s)
+end
+
+function onChange(device, f)
+
 end
 
 function Device(a)
@@ -30,15 +39,30 @@ function Sensor(a)
     return sensor
 end
 
-function MultiDevice(devices, builder)
-    local lastupdate
-    local sensors = {}
+function Switch(a)
+    local switch = Device(a)
 
-    for i, v in pairs(devices) do
-        sensors[i] = builder(v)
+    switch.on = otherdevices[a] == State.on
+    switch.off = not switch.on
+    switch.turnOn = function()
+        commandArray[a] = State.on
+    end
+    switch.turnOff = function()
+        commandArray[a] = State.off
     end
 
-    for i, v in pairs(sensors) do
+    return switch
+end
+
+function MultiDevice(devices, builder)
+    local lastupdate
+    local devices = {}
+
+    for i, v in pairs(devices) do
+        devices[i] = builder(v)
+    end
+
+    for i, v in pairs(devices) do
         if (lastupdate == nil) then
             lastupdate = v.lastupdate
         else
@@ -47,7 +71,7 @@ function MultiDevice(devices, builder)
     end
 
     return {
-        sensors = sensors,
+        devices = devices,
         lastupdate = lastupdate
     }
 end
@@ -64,12 +88,12 @@ function Multiswitch(devices)
         end
     }
 
-    local switch = MultiDevice(devices, Device)
+    local switch = MultiDevice(devices, Switch)
 
     switch.getvalue = function()
         local value = 0
-        for i, v in pairs(switch.sensors) do
-            if (otherdevices[v.name] == "On") then
+        for i, v in pairs(switch.devices) do
+            if (v.on) then
                 value = i
             end
         end
@@ -77,12 +101,12 @@ function Multiswitch(devices)
     end
 
     switch.setvalue = function(value)
-        for i, v in pairs(switch.sensors) do
-            if (otherdevices[v.name] == "On" and i ~= value) then
-                commandArray[v.name] = "Off"
+        for i, v in pairs(switch.devices) do
+            if (v.on and i ~= value) then
+                v.turnOff()
             end
-            if (otherdevices[v.name] == "Off" and i == value) then
-                commandArray[v.name] = "On"
+            if (v.off and i == value) then
+                v.turnOn()
             end
         end
     end
