@@ -54,11 +54,11 @@ function Switch(a)
     return switch
 end
 
-function MultiDevice(devices, builder)
+function MultiDevice(devs, builder)
     local lastupdate
     local devices = {}
 
-    for i, v in pairs(devices) do
+    for i, v in pairs(devs) do
         devices[i] = builder(v)
     end
 
