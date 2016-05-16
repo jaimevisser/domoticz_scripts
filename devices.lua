@@ -39,7 +39,6 @@ function Sensor(a)
         return s
     end)
 
-
     return sensor
 end
 
