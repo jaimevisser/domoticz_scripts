@@ -11,8 +11,6 @@ local ceiling_light = Switch("Badkamer Licht")
 local mirror_light = Switch("Badkamer spiegellicht")
 local timeout = minutes(3)
 
-log("timeout: " .. timeout .. " - " .. round_minutes(detector.lastupdate))
-
 if (detector.off and round_minutes(detector.lastupdate) == timeout) then
     log("nobody here for " .. timeout .. "s")
 

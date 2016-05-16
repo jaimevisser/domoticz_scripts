@@ -10,8 +10,8 @@ local detector = Switch("Badkamer detector")
 local lights = Switch("Badkamer Licht")
 
 onChange(detector, function()
-    log("change")
     if (detector.on) then
+        log("presence detected, turning light on")
         lights.turnOn()
     end
 end)
