@@ -2,15 +2,15 @@ package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 utils = require('utils')
 require('devices')
 require('time')
-scriptname = "BATHROOM DETECTOR"
+scriptname = "LIVING DEVICE"
 
 commandArray = {}
 
-local detector = Switch("Badkamer detector")
+local kitchen_detector = Switch("Keuken detector aanrecht")
 
-onChange(detector, function()
-    if (detector.on) then
-        local lights = Switch("Badkamer Licht")
+onChange(kitchen_detector, function()
+    if (kitchen_detector.on) then
+        local lights = Switch("Keuken spots")
         log("presence detected, turning light on")
         lights.turnOn()
     end
