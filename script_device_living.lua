@@ -10,7 +10,7 @@ local kitchen_detector = Switch("Keuken detector aanrecht")
 
 onChange(kitchen_detector, function()
     if (kitchen_detector.on) then
-        local lights = Switch("Keuken spots")
+        local lights = Switch("Keuken Spots")
         log("presence detected, turning light on")
         lights.turnOn()
     end
