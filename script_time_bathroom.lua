@@ -7,10 +7,10 @@ scriptname = "BATHROOM"
 commandArray = {}
 
 local detector = Switch("Badkamer detector")
-local timeout = minutes(2)
+local timeout = minutes(4)
 local moisture_bathroom = Sensor('Badkamer')
 
-if (detector.off and round_minutes(detector.lastupdate - timeout) == 0 and moisture_bathroom.value[2] < 70) then
+if (detector.off and round_minutes(detector.lastupdate - timeout) == 0 and moisture_bathroom.value[2] < 60) then
     log("nobody here for " .. timeout .. "s")
 
     local ceiling_light = Switch("Badkamer Licht")
