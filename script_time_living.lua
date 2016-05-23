@@ -7,7 +7,7 @@ scriptname = "LIVING"
 commandArray = {}
 
 local detector = Switch("Keuken detector aanrecht")
-local timeout = 30
+local timeout = minutes(1)
 
 if (detector.off and round_minutes(detector.lastupdate - timeout) == 0) then
     log("nobody in the kitchen for " .. timeout .. "s")
