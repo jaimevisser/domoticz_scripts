@@ -60,7 +60,7 @@ if (wanted_ventilation < ventilation.value and ventilation.lastupdate < minutes(
     return commandArray
 end
 
-ventilation.value = wanted_ventilation
+--ventilation.value = wanted_ventilation
 var_setting.value = wanted_ventilation
 
 log('changed to ' .. wanted_ventilation)
