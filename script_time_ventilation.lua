@@ -37,14 +37,19 @@ if (not automatic) then
 end
 
 local wanted_ventilation = 0
+local long_diff = moisture_bathroom.value[2] - var_m_long.value
+local short_diff = moisture_bathroom.value[2] - var_m_short.value
 
-if (moisture_bathroom.value[2] > 60) then
+if (long_diff > 7) then
     wanted_ventilation = 3
     log("It's very moist")
+elseif(short_diff > 3) then
+    wanted_ventilation = 3
+    log("Sudden moisture increase!")
 elseif ((moisture_bathroom.value[1] > 24)) then
     log("It's hot (" .. tostring(moisture_bathroom.value[1]) .. "C)")
     wanted_ventilation = 3
-elseif (moisture_bathroom.value[2] > 55) then
+elseif (long_diff > 4) then
     log("It's moist")
     wanted_ventilation = 2
 end
@@ -60,7 +65,7 @@ if (wanted_ventilation < ventilation.value and ventilation.lastupdate < minutes(
     return commandArray
 end
 
---ventilation.value = wanted_ventilation
+ventilation.value = wanted_ventilation
 var_setting.value = wanted_ventilation
 
 log('changed to ' .. wanted_ventilation)
