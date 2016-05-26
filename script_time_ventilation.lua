@@ -43,17 +43,17 @@ local short_diff = moisture_bathroom.value[2] - var_m_short.value
 log("long diff: " .. tostring(long_diff))
 log("short diff: " .. tostring(short_diff))
 
-if (long_diff > 7) then
-    wanted_ventilation = 3
-    log("It's very moist")
-elseif (short_diff > 2) then
+if (short_diff > 2) then
     wanted_ventilation = 3
     log("Sudden moisture increase!")
+elseif (long_diff > 5) then
+    wanted_ventilation = 3
+    log("It's still very moist")
 elseif ((moisture_bathroom.value[1] > 24)) then
     log("It's hot (" .. tostring(moisture_bathroom.value[1]) .. "C)")
     wanted_ventilation = 3
 elseif (long_diff > 2) then
-    log("It's moist")
+    log("It's still moist")
     wanted_ventilation = 2
 end
 
