@@ -12,7 +12,7 @@ local ventilation = Multiswitch {
     [2] = 'Ventilatie stand 2',
     [3] = 'Ventilatie stand 3'
 }
-local moisture_bathroom = Sensor('Badkamer')
+local moisture_bathroom = Sensor('Badkamer Temperatuur')
 local var_setting = Uservar('Script instelling ventilatie')
 local var_m_long = Uservar('Vochtgemiddelde badkamer lang')
 local var_m_short = Uservar('Vochtgemiddelde badkamer kort')
@@ -46,13 +46,13 @@ log("short diff: " .. tostring(short_diff))
 if (long_diff > 7) then
     wanted_ventilation = 3
     log("It's very moist")
-elseif (short_diff > 3) then
+elseif (short_diff > 2) then
     wanted_ventilation = 3
     log("Sudden moisture increase!")
 elseif ((moisture_bathroom.value[1] > 24)) then
     log("It's hot (" .. tostring(moisture_bathroom.value[1]) .. "C)")
     wanted_ventilation = 3
-elseif (long_diff > 4) then
+elseif (long_diff > 2) then
     log("It's moist")
     wanted_ventilation = 2
 end
