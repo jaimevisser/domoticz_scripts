@@ -8,12 +8,10 @@ commandArray = {}
 
 local detector = Switch("Badkamer detector")
 
-onChange(detector, function()
-    if (detector.on) then
-        local lights = Switch("Badkamer Licht")
-        log("presence detected, turning light on")
-        lights.turnOn()
-    end
+detector.whenOn(function()
+    log("presence detected, turning light on")
+    local lights = Switch("Badkamer Licht")
+    lights.turnOn()
 end)
 
 return commandArray

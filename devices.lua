@@ -54,6 +54,12 @@ function Switch(a)
         commandArray[a] = State.off
     end
 
+    switch.whenOn = function(f)
+        onChange(switch, function()
+            if (switch.on) then f() end
+        end)
+    end
+
     return switch
 end
 
