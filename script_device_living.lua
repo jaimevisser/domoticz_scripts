@@ -8,12 +8,10 @@ commandArray = {}
 
 local kitchen_detector = Switch("Keuken detector aanrecht")
 
-onChange(kitchen_detector, function()
-    if (kitchen_detector.on) then
-        local lights = Switch("Keuken Spots")
-        log("presence detected, turning light on")
-        lights.turnOn()
-    end
+kitchen_detector.whenOn(function()
+    log("presence detected, turning light on")
+    local lights = Switch("Keuken Spots")
+    lights.turnOn()
 end)
 
 return commandArray
