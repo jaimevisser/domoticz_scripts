@@ -1,10 +1,4 @@
-package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
-utils = require('utils')
-require('devices')
-require('time')
 scriptname = "VENTILATION"
-
-commandArray = {}
 
 log("Starting")
 
@@ -34,7 +28,7 @@ local automatic = (ventilation.value == var_setting.value) or
 
 if (not automatic) then
     log("manual mode")
-    return commandArray
+    return
 end
 
 local wanted_ventilation = 0
@@ -65,12 +59,12 @@ end
 log('wanted: ' .. tostring(wanted_ventilation))
 
 if (wanted_ventilation == ventilation.value) then
-    return commandArray
+    return
 end
 
 if (wanted_ventilation < ventilation.value and ventilation.lastupdate < minutes(30)) then
     log("change too recent")
-    return commandArray
+    return
 end
 
 ventilation.value = wanted_ventilation
@@ -79,5 +73,3 @@ var_setting.value = wanted_ventilation
 log('changed to ' .. wanted_ventilation)
 
 for k, v in pairs(commandArray) do log("commandArray[" .. k .. "] " .. v) end
-
-return commandArray

@@ -1,10 +1,4 @@
-package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
-utils = require('utils')
-require('devices')
-require('time')
 scriptname = "LIVING"
-
-commandArray = {}
 
 local detector = Switch("Keuken detector aanrecht")
 local timeout = minutes(1)
@@ -19,5 +13,3 @@ if (detector.off and round_minutes(detector.lastupdate - timeout) == 0) then
         kitchen_spots.turnOff()
     end
 end
-
-return commandArray

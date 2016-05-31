@@ -60,6 +60,12 @@ function Switch(a)
         end)
     end
 
+    switch.whenOff = function(f)
+        onChange(switch, function()
+            if (switch.off) then f() end
+        end)
+    end
+
     return switch
 end
 

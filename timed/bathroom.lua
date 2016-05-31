@@ -1,10 +1,4 @@
-package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
-utils = require('utils')
-require('devices')
-require('time')
 scriptname = "BATHROOM"
-
-commandArray = {}
 
 local detector = Switch("Badkamer detector")
 local timeout = minutes(3)
@@ -26,6 +20,3 @@ if (detector.off and
         mirror_light.turnOff()
     end
 end
-
-
-return commandArray
