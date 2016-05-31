@@ -4,20 +4,20 @@ local ventilation = Multiswitch {
     [2] = 'Ventilatie stand 2',
     [3] = 'Ventilatie stand 3'
 }
-local moisture_bathroom = Sensor('Badkamer Temperatuur')
-local moisture_living = Sensor('Woonkamer Temperatuur')
+local sensor_bathroom = Sensor('Badkamer Temperatuur')
+local sensor_living = Sensor('Woonkamer Temperatuur')
 local var_setting = Uservar('Script instelling ventilatie')
 local var_m_long = Uservar('Vochtgemiddelde badkamer lang')
 local var_m_short = Uservar('Vochtgemiddelde badkamer kort')
 
 every(hours(1), function()
-    var_m_long.value = var_m_long.value * .90 + moisture_bathroom.value[2] * .10
+    var_m_long.value = var_m_long.value * .90 + sensor_bathroom.value[2] * .10
 end)
 
-var_m_short.value = var_m_short.value * .80 + moisture_bathroom.value[2] * .20
+var_m_short.value = var_m_short.value * .80 + sensor_bathroom.value[2] * .20
 
 
-for k, v in pairs(moisture_bathroom.value) do log("moisture sensor[" .. k .. "] " .. v) end
+for k, v in pairs(sensor_bathroom.value) do log("moisture sensor[" .. k .. "] " .. v) end
 
 log("current ventilation: " .. ventilation.value .. " - " .. tostring(var_setting.value))
 
@@ -30,9 +30,9 @@ if (not automatic) then
 end
 
 local wanted_ventilation = 0
-local long_diff = moisture_bathroom.value[2] - var_m_long.value
-local short_diff = moisture_bathroom.value[2] - var_m_short.value
-local house_diff = moisture_bathroom.value[2] - moisture_living.value[2]
+local long_diff = sensor_bathroom.value[2] - var_m_long.value
+local short_diff = sensor_bathroom.value[2] - var_m_short.value
+local house_diff = sensor_bathroom.value[2] - sensor_living.value[2]
 
 log("long diff: " .. tostring(long_diff))
 log("short diff: " .. tostring(short_diff))
@@ -43,11 +43,11 @@ if (short_diff > 2) then
 elseif (long_diff > 5) then
     wanted_ventilation = 3
     log("It's still very moist")
-elseif ((moisture_bathroom.value[1] > 24)) then
-    log("It's hot (" .. tostring(moisture_bathroom.value[1]) .. "C)")
+elseif ((sensor_bathroom.value[1] > 24)) then
+    log("It's hot (" .. tostring(sensor_bathroom.value[1]) .. "C)")
     wanted_ventilation = 3
-elseif (long_diff > 2) then
-    log("It's still moist")
+elseif (long_diff > 1) then
+    log("It's moist")
     wanted_ventilation = 2
 elseif (house_diff > 3) then
     log("Bathroom is more moist then living")
