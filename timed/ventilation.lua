@@ -1,6 +1,4 @@
-scriptname = "VENTILATION"
-
-log("Starting")
+scriptname = "T.VENTILATION"
 
 local ventilation = Multiswitch {
     [2] = 'Ventilatie stand 2',

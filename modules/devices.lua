@@ -48,10 +48,16 @@ function Switch(a)
     switch.on = otherdevices[a] == State.on
     switch.off = not switch.on
     switch.turnOn = function()
-        commandArray[a] = State.on
+        if (switch.off) then
+            log("Turning " .. a .. " on")
+            commandArray[a] = State.on
+        end
     end
     switch.turnOff = function()
-        commandArray[a] = State.off
+        if (switch.on) then
+            log("Turning " .. a .. " off")
+            commandArray[a] = State.off
+        end
     end
 
     switch.whenOn = function(f)

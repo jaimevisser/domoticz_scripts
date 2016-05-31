@@ -1,4 +1,4 @@
-scriptname = "KITCHENETTE"
+scriptname = "E.KITCHENETTE"
 
 local kitchenette_door = Switch("Bijkeuken Deursensor")
 

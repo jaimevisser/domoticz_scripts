@@ -1,4 +1,4 @@
-scriptname = "BATHROOM"
+scriptname = "E.BATHROOM"
 
 local detector = Switch("Badkamer detector")
 
