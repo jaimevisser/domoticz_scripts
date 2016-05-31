@@ -1,5 +1,5 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
-utils = require('utils')
+utils = require('modules/utils')
 
 State = {
     on = "On",
