@@ -52,6 +52,12 @@ elseif (long_diff > 1) then
 elseif (house_diff > 3) then
     log("Bathroom is more moist then living")
     wanted_ventilation = 2
+elseif (ventilation.lastupdate > minutes(20) and short_diff < -1 ) then
+    log("Moisture level is still decreasing")
+    wanted_ventilation = 2
+elseif (sensor_bathroom.value[2] > 65) then
+    log("Bathroom is moist")
+    wanted_ventilation = 2
 end
 
 log('wanted: ' .. tostring(wanted_ventilation))
