@@ -1,5 +1,5 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
-utils = require('utils')
+utils = require('modules/utils')
 
 local plexurl = 'http://192.168.1.10:32400/'
 local plextoken = '8f8a23640278ed745414aa63b776d20aeafd149a'
