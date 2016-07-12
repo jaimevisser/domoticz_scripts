@@ -6,7 +6,7 @@ local plextoken = '8f8a23640278ed745414aa63b776d20aeafd149a'
 local clients = {}
 local data = utils.getURL(plexurl .. 'status/sessions/?X-Plex-Token=' .. plextoken)
 
-string.gsub(data, '<Player.-\/>', function(s)
+string.gsub(data, '<Player.-/>', function(s)
     local c, s = string.match(s, 'platform="(.-)" .* state="(.-)"')
     log(c..":"..s)
     clients[c] = { status = s }
