@@ -7,6 +7,8 @@ require('modules/devices')
 
 PlexTV = Switch("TV - Plex")
 
+Plex = require('modules/plex')
+
 require('events/bathroom')
 require('events/kitchenette')
 require('events/living')
