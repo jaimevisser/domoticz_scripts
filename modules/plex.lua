@@ -13,7 +13,7 @@ string.gsub(data, '<Player.-/>', function(s)
 end)
 
 
-if (clients["Chromecast"] ~= nil and clients["Chromecast"].status == "Playing") then
+if (clients["Chromecast"] ~= nil and clients["Chromecast"].status == "playing") then
     PlexTV.turnOn()
 else
     PlexTV.turnOff()
