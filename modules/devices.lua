@@ -50,8 +50,8 @@ function Switch(a)
     switch.changed = false
     switch.turnOn = function()
         if (switch.off) then
-            switch.off = true
-            switch.on = false
+            switch.off = false
+            switch.on = true
             switch.changed = true
             log("Turning " .. a .. " on")
             commandArray[a] = State.on
@@ -59,8 +59,8 @@ function Switch(a)
     end
     switch.turnOff = function()
         if (switch.on) then
-            switch.off = false
-            switch.on = true
+            switch.off = true
+            switch.on = false
             switch.changed = true
             log("Turning " .. a .. " off")
             commandArray[a] = State.off
