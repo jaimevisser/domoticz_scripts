@@ -13,7 +13,7 @@ function M.timedifference(s)
     return difference
 end
 
-function getURL(url)
+function M.getURL(url)
     return os.execute("curl " .. url)
 end
 
