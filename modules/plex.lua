@@ -6,13 +6,18 @@ scriptname = "T.PLEX"
 
 local data = utils.getURL(plexurl .. 'status/sessions/?X-Plex-Token=' .. plextoken)
 
-log(data)
-
 string.gsub(data, '<Player.-/>', function(s)
     local c, s = string.match(s, 'platform="(.-)" .* state="(.-)"')
-    log(c..":"..s)
+    log(c .. ":" .. s)
     clients[c] = { status = s }
 end)
+
+local plextv = Switch("TV - Plex")
+if (Clients["Chromecast"] ~= nil and clients["Chromecast"].status == "Playing") then
+    plextv.turnOn()
+else
+    plextv.turnOff()
+end
 
 return {
     clients = clients
