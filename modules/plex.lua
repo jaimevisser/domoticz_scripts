@@ -7,7 +7,7 @@ scriptname = "T.PLEX"
 local data = utils.getURL(plexurl .. 'status/sessions/?X-Plex-Token=' .. plextoken)
 
 string.gsub(data, '<Player.-/>', function(s)
-    local c, s = string.match(s, 'platform="(.-)" .* state="(.-)"')
+    local s, c = string.match(s, 'state="(.-)" .* title="(.-)"')
     log(c .. ":" .. s)
     clients[c] = { status = s }
 end)
