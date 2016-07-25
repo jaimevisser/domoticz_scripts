@@ -14,7 +14,7 @@ function M.timedifference(s)
 end
 
 function M.getURL(url)
-    return os.execute("curl " .. url)
+    return os.capture("curl " .. url)
 end
 
 return M
