@@ -11,6 +11,6 @@ end)
 living_detector.whenOn(function()
     log("presence detected in living room")
     if (PlexTV.off) then
-    Switch("Scene:Woonkamer aan").turnOn()
+        Switch("Scene:Woonkamer aan").turnOn()
     end
 end)

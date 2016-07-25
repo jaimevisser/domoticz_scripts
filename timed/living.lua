@@ -8,3 +8,9 @@ if (detector.off and round_minutes(detector.lastupdate - timeout) == 0) then
 
     Switch("Keuken Spots").turnOff()
 end
+
+if (PlexTV.changed) then
+    if (PlexTV.on) then
+        Switch("Scene:TV kijken").turnOn()
+    end
+end
