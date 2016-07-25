@@ -1,6 +1,8 @@
 local M = {}
 
 function M.timedifference(s)
+    if(s == nil) then return days(9000) end
+
     local year = string.sub(s, 1, 4)
     local month = string.sub(s, 6, 7)
     local day = string.sub(s, 9, 10)

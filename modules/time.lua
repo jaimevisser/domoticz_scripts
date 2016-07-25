@@ -6,6 +6,10 @@ function hours(hours)
     return minutes(hours * 60)
 end
 
+function days(days)
+    return hours(days) * 24
+end
+
 function round_minutes(time)
     return 60 * math.ceil(time / 60)
 end

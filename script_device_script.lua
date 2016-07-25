@@ -1,9 +1,9 @@
 commandArray = {}
 
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
+require('modules/time')
 utils = require('modules/utils')
 require('modules/devices')
-require('modules/time')
 
 PlexTV = Switch("TV - Plex")
 
