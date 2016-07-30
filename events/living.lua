@@ -30,9 +30,9 @@ lux.whenChanged(function()
                 Switch("Scene:Woonkamer aan").turnOn()
             end
         end
-        if (Living.bright) then
-            log("It's getting bright, turning off lights")
-            Switch("Scene:Woonkamer uit").turnOn()
-        end
+    end
+    if (Living.bright) then
+        log("It's getting bright, turning off lights")
+        Switch("Scene:Woonkamer uit").turnOn()
     end
 end)
