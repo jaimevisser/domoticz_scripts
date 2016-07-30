@@ -11,6 +11,7 @@ Plex = require('modules/plex')
 
 require('events/bathroom')
 require('events/kitchenette')
+require('common/living')
 require('events/living')
 
 return commandArray

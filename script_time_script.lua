@@ -10,6 +10,7 @@ PlexTV = Switch("TV - Plex")
 Plex = require('modules/plex')
 
 require('timed/bathroom')
+require('common/living')
 require('timed/living')
 require('timed/reboot')
 require('timed/ventilation')

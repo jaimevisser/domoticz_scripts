@@ -3,7 +3,7 @@ scriptname = "E.LIVING"
 local kitchen_detector = Switch("Keuken detector aanrecht")
 local living_detector = Switch("Woonkamer Sensor")
 local lux = Sensor("Woonkamer Lux")
-local living_lights = Switch("Zithoek licht")
+
 
 kitchen_detector.whenOn(function()
     log("presence detected in kitchen")
@@ -17,13 +17,3 @@ living_detector.whenOn(function()
     end
 end)
 
-if (PlexTV.changed) then
-    log("Plex changed!")
-    if (living_lights.on) then
-        if (PlexTV.on) then
-            Switch("Scene:TV kijken").turnOn()
-        else
-            Switch("Scene:Woonkamer aan").turnOn()
-        end
-    end
-end
