@@ -22,21 +22,33 @@ State = {
     off = "Off"
 }
 
-function onChange(device, f)
+local function changed(device)
     for deviceName, deviceValue in pairs(devicechanged) do
         if (deviceName == device.name) then
-            f()
+            return true
         end
+    end
+
+    return false
+end
+
+function onChange(device, f)
+    if (changed(device)) then
+        f()
     end
 end
 
-function Device(a)
-    local lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+function Device(name)
+    local device = {}
 
-    return {
-        name = a,
-        lastupdate = lastupdate
-    }
+    device.name = name
+    device.lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+    device.changed = changed(device)
+    device.whenChanged = function(f)
+        if (device.changed) then f() end
+    end
+
+    return device
 end
 
 function Sensor(a)
@@ -59,7 +71,6 @@ function Switch(a)
 
     switch.on = otherdevices[a] == State.on
     switch.off = not switch.on
-    switch.changed = false
     switch.turnOn = function()
         if (switch.off) then
             switch.off = false
@@ -69,6 +80,7 @@ function Switch(a)
             commandArray[a] = State.on
         end
     end
+
     switch.turnOff = function()
         if (switch.on) then
             switch.off = true
@@ -80,19 +92,11 @@ function Switch(a)
     end
 
     switch.whenOn = function(f)
-        onChange(switch, function()
-            if (switch.on) then f() end
-        end)
+        if (switch.changed and switch.on) then f() end
     end
 
     switch.whenOff = function(f)
-        onChange(switch, function()
-            if (switch.off) then f() end
-        end)
-    end
-
-    switch.whenChanged = function(f)
-        onChange(switch, f)
+        if (switch.changed and switch.off) then f() end
     end
 
     return switch
@@ -102,6 +106,8 @@ function Dimmer(a)
     local dimmer = Sensor(a)
 
     dimmer.on = dimmer.value[1] > 0
+    dimmer.off = not dimmer.on
+
 end
 
 function MultiDevice(devs, builder)
