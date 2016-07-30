@@ -43,8 +43,8 @@ Living.lastupdate = math.min(Living.lights.lastupdate, Living.detectors.lastupda
 Living.presence = Living.detectors.on or PlexTV.on or
         Living.lastupdate < Living.timeout or
         PlexTV.lastupdate < Living.timeout
-Living.dark = lux.value < 50
-Living.bright = lux.value > 100
+Living.dark = Living.lux.value < 50
+Living.bright = Living.lux.value > 100
 
 if (Living.presence) then
     log("Probably people present")
