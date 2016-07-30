@@ -1,6 +1,6 @@
 scriptname = "C.LIVING"
 
-local living_lights = Dimmer("Zithoek licht")
+local living_lights = Dimmer("Zithoek Licht")
 
 if (PlexTV.changed) then
     log("Plex changed!")
