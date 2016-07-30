@@ -80,6 +80,8 @@ local function switchtype(switch)
     switch.whenOff = function(f)
         if (switch.changed and switch.off) then f() end
     end
+
+    return switch
 end
 
 function Switch(a)
