@@ -60,8 +60,6 @@ elseif (sensor_bathroom.value[2] > 65) then
     wanted_ventilation = 2
 end
 
-log('wanted: ' .. tostring(wanted_ventilation))
-
 if (wanted_ventilation == ventilation.value) then
     return
 end
@@ -75,5 +73,3 @@ ventilation.value = wanted_ventilation
 var_setting.value = wanted_ventilation
 
 log('changed to ' .. wanted_ventilation)
-
-for k, v in pairs(commandArray) do log("commandArray[" .. k .. "] " .. v) end

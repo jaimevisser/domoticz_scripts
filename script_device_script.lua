@@ -9,9 +9,9 @@ PlexTV = Switch("TV - Plex")
 
 Plex = require('modules/plex')
 
+require('common/living')
 require('events/bathroom')
 require('events/kitchenette')
-require('common/living')
 require('events/living')
 
 return commandArray

@@ -12,8 +12,8 @@ Living.presence = kitchen_detector.on or living_detector.on or kitchenette_door.
 Living.presence = Living.presence or (kitchen_detector.lastupdate < Living.timeout)
 Living.presence = Living.presence or (living_detector.lastupdate < Living.timeout)
 Living.presence = Living.presence or (living_detector.lastupdate < Living.timeout)
-Living.dark = lux.value[1] < 50
-Living.bright = lux.value[1] > 100
+Living.dark = lux.value < 50
+Living.bright = lux.value > 100
 
 if (Living.presence) then
     log("Probably people present")

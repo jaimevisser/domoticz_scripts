@@ -1,7 +1,9 @@
 local M = {}
 
+M.maxtime = days(9000)
+
 function M.timedifference(s)
-    if(s == nil) then return days(9000) end
+    if (s == nil) then return M.maxtime end
 
     local year = string.sub(s, 1, 4)
     local month = string.sub(s, 6, 7)
@@ -16,14 +18,14 @@ function M.timedifference(s)
 end
 
 function M.capture(cmd, raw)
-  local f = assert(io.popen(cmd, 'r'))
-  local s = assert(f:read('*a'))
-  f:close()
-  if raw then return s end
-  s = string.gsub(s, '^%s+', '')
-  s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
-  return s
+    local f = assert(io.popen(cmd, 'r'))
+    local s = assert(f:read('*a'))
+    f:close()
+    if raw then return s end
+    s = string.gsub(s, '^%s+', '')
+    s = string.gsub(s, '%s+$', '')
+    s = string.gsub(s, '[\n\r]+', ' ')
+    return s
 end
 
 function M.getURL(url)

@@ -65,14 +65,28 @@ function Sensor(a)
         return s
     end)
 
+    if (i == 2) then sensor.value = sensor.value[1] end
+
     return sensor
+end
+
+local function switchtype(switch)
+    switch.off = not switch.on
+
+    switch.whenOn = function(f)
+        if (switch.changed and switch.on) then f() end
+    end
+
+    switch.whenOff = function(f)
+        if (switch.changed and switch.off) then f() end
+    end
 end
 
 function Switch(a)
     local switch = Device(a)
 
     switch.on = otherdevices[a] == State.on
-    switch.off = not switch.on
+
     switch.turnOn = function()
         if (switch.off) then
             switch.off = false
@@ -91,24 +105,46 @@ function Switch(a)
         end
     end
 
-    switch.whenOn = function(f)
-        if (switch.changed and switch.on) then f() end
-    end
-
-    switch.whenOff = function(f)
-        if (switch.changed and switch.off) then f() end
-    end
-
-    return switch
+    return switchtype(switch)
 end
 
 function Dimmer(a)
     local dimmer = Sensor(a)
 
-    dimmer.on = dimmer.value[1] > 0
-    dimmer.off = not dimmer.on
+    dimmer.on = dimmer.value > 0
 
-    return dimmer
+    dimmer.turnOn = function()
+        if (dimmer.off) then
+            dimmer.off = false
+            dimmer.on = true
+            log("Turning " .. a .. " on")
+            commandArray[a] = State.on
+        end
+    end
+
+    dimmer.turnOff = function()
+        if (dimmer.on) then
+            dimmer.off = true
+            dimmer.on = false
+            log("Turning " .. a .. " off")
+            commandArray[a] = State.off
+        end
+    end
+
+    return switchtype(dimmer)
+end
+
+function DeviceCollection(devices)
+    local lastupdate = utils.maxtime
+
+    for i, v in pairs(devices) do
+        lastupdate = math.min(lastupdate, v.lastupdate)
+    end
+
+    return {
+        devices = devices,
+        lastupdate = lastupdate
+    }
 end
 
 function MultiDevice(devs, builder)
@@ -119,18 +155,7 @@ function MultiDevice(devs, builder)
         devices[i] = builder(v)
     end
 
-    for i, v in pairs(devices) do
-        if (lastupdate == nil) then
-            lastupdate = v.lastupdate
-        else
-            lastupdate = math.min(lastupdate, v.lastupdate)
-        end
-    end
-
-    return {
-        devices = devices,
-        lastupdate = lastupdate
-    }
+    return DeviceCollection(devices)
 end
 
 function Multiswitch(devices)
