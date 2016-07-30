@@ -15,6 +15,12 @@ Living.presence = Living.presence or (living_detector.lastupdate < Living.timeou
 Living.dark = lux.value[1] < 50
 Living.bright = lux.value[1] > 100
 
+if (Living.presence) then
+    log("Probably people present")
+else
+    log("Probably nobody present")
+end
+
 if (PlexTV.changed) then
     log("Plex changed!")
     if (living_lights.on) then

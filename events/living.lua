@@ -22,6 +22,7 @@ end)
 
 lux.whenChanged(function()
     if (Living.presence) then
+        log("There is presence in the living room")
         if (Living.dark) then
             if (PlexTV.on) then
                 Switch("Scene:TV kijken").turnOn()
@@ -30,6 +31,7 @@ lux.whenChanged(function()
             end
         end
         if (Living.bright) then
+            log("It's getting bright, turning off lights")
             Switch("Scene:Woonkamer uit").turnOn()
         end
     end
