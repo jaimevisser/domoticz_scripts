@@ -3,6 +3,10 @@ utils = require('modules/utils')
 
 scriptname = "M.DEVICES"
 
+function log(s)
+    print("[" .. scriptname .. "] " .. s)
+end
+
 if (devicechanged ~= nil) then
     for i, v in pairs(devicechanged) do log(i, v) end
 end
@@ -11,10 +15,6 @@ State = {
     on = "On",
     off = "Off"
 }
-
-function log(s)
-    print("[" .. scriptname .. "] " .. s)
-end
 
 function onChange(device, f)
     for deviceName, deviceValue in pairs(devicechanged) do
