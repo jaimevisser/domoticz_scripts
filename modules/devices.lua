@@ -3,7 +3,9 @@ utils = require('modules/utils')
 
 scriptname = "M.DEVICES"
 
-for i, v in pairs(devicechanged) do log(i, v) end
+if (devicechanged ~= nil) then
+    for i, v in pairs(devicechanged) do log(i, v) end
+end
 
 State = {
     on = "On",
