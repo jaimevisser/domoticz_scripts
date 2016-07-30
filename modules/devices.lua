@@ -12,7 +12,7 @@ function debug(name, table)
 end
 
 if (devicechanged ~= nil) then
-    debug("devicechanged", devicechanged)
+    --debug("devicechanged", devicechanged)
 end
 --debug("otherdevices", otherdevices)
 --debug("otherdevices_svalues", otherdevices_svalues)
@@ -23,6 +23,8 @@ State = {
 }
 
 local function changed(device)
+    if (devicechanged == nil) then return false end
+
     for deviceName, deviceValue in pairs(devicechanged) do
         if (deviceName == device.name) then
             return true
@@ -75,7 +77,6 @@ function Switch(a)
         if (switch.off) then
             switch.off = false
             switch.on = true
-            switch.changed = true
             log("Turning " .. a .. " on")
             commandArray[a] = State.on
         end
@@ -85,7 +86,6 @@ function Switch(a)
         if (switch.on) then
             switch.off = true
             switch.on = false
-            switch.changed = true
             log("Turning " .. a .. " off")
             commandArray[a] = State.off
         end
