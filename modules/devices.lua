@@ -44,7 +44,7 @@ function Device(name)
     local device = {}
 
     device.name = name
-    device.lastupdate = utils.timedifference(otherdevices_lastupdate[a])
+    device.lastupdate = utils.timedifference(otherdevices_lastupdate[name])
     device.changed = changed(device)
     device.whenChanged = function(f)
         if (device.changed) then f() end
