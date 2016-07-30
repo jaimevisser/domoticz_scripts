@@ -8,8 +8,11 @@ function log(s)
 end
 
 if (devicechanged ~= nil) then
-    for i, v in pairs(devicechanged) do log(i, v) end
+    for i, v in pairs(devicechanged) do log(i .. "||" .. tostring(v)) end
 end
+
+for i, v in pairs(otherdevices) do log(i .. "||" .. tostring(v)) end
+for i, v in pairs(otherdevices_svalues) do log(i .. "||" .. tostring(v)) end
 
 State = {
     on = "On",
