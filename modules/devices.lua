@@ -15,7 +15,7 @@ if (devicechanged ~= nil) then
     debug("devicechanged", devicechanged)
 end
 --debug("otherdevices", otherdevices)
---debug("otherdevices_svalues", otherdevices_svalues)
+debug("otherdevices_svalues", otherdevices_svalues)
 
 State = {
     on = "On",
