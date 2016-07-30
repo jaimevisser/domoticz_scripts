@@ -1,6 +1,10 @@
 package.path = package.path .. ';' .. '/home/pi/domoticz/scripts/lua/?.lua'
 utils = require('modules/utils')
 
+scriptname = "M.DEVICES"
+
+for i, v in pairs(devicechanged) do log(i, v) end
+
 State = {
     on = "On",
     off = "Off"
@@ -79,7 +83,17 @@ function Switch(a)
         end)
     end
 
+    switch.whenChanged = function(f)
+        onChange(switch, f)
+    end
+
     return switch
+end
+
+function Dimmer(a)
+    local dimmer = Sensor(a)
+
+    dimmer.on = dimmer.value[1] > 0
 end
 
 function MultiDevice(devs, builder)

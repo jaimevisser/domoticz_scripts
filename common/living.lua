@@ -1,4 +1,4 @@
-scriptname = "M.LIVING"
+scriptname = "C.LIVING"
 
 local living_lights = Switch("Zithoek licht")
 
