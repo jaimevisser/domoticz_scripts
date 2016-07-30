@@ -7,12 +7,15 @@ function log(s)
     print("[" .. scriptname .. "] " .. s)
 end
 
-if (devicechanged ~= nil) then
-    for i, v in pairs(devicechanged) do log(i .. "||" .. tostring(v)) end
+function debug(name, table)
+    for i, v in pairs(table) do log(name .. "['" .. i .. "'] = " .. tostring(v)) end
 end
 
-for i, v in pairs(otherdevices) do log(i .. "||" .. tostring(v)) end
-for i, v in pairs(otherdevices_svalues) do log(i .. "||" .. tostring(v)) end
+if (devicechanged ~= nil) then
+    debug("devicechanged", devicechanged)
+end
+debug("otherdevices", otherdevices)
+debug("otherdevices_svalues", otherdevices_svalues)
 
 State = {
     on = "On",
