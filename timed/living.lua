@@ -1,10 +1,14 @@
 scriptname = "T.LIVING"
 
-local detector = Switch("Keuken detector aanrecht")
-local timeout = minutes(1)
+if (Living.detector.kitchen.off and
+        Living.detector.kitchen.lastupdate == Living.timeout_kitchen) then
+    log("nobody in the kitchen for " .. Living.timeout_kitchen .. "s")
 
-if (detector.off and round_minutes(detector.lastupdate - timeout) == 0) then
-    log("nobody in the kitchen for " .. timeout .. "s")
+    Living.light.kitchen_spots.turnOff()
+end
 
-    Switch("Keuken Spots").turnOff()
+if (Living.lights.on and Living.lastupdate == Living.timeout) then
+    log("nobody in the living for " .. Living.timeout .. "s")
+
+    Living.lights.turnOff()
 end
