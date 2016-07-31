@@ -37,13 +37,13 @@ Living.lights.turnOn = function()
     end
 end
 
-Living.timeout = minutes(60)
+Living.timeout = minutes(10)
 Living.timeout_kitchen = minutes(1)
 Living.lastupdate = math.min(Living.lights.lastupdate, Living.detectors.lastupdate)
 Living.presence = Living.detectors.on or PlexTV.on or
         Living.lastupdate < Living.timeout or
         PlexTV.lastupdate < Living.timeout
-Living.dark = Living.lux.value < 50
+Living.dark = Living.lux.value < 60
 Living.bright = Living.lux.value > 100
 
 if (Living.presence) then

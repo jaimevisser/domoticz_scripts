@@ -16,13 +16,15 @@ living_detector.whenOn(function()
 end)
 
 Living.lux.whenChanged(function()
-    if (Living.presence) then
-        log("There is presence in the living room")
-        Living.lights.turnOn()
-    end
-    if (Living.bright) then
-        log("It's getting bright, turning off lights")
-        Living.lights.turnOff()
+    if (Living.lights.living.lastupdate < minutes(2)) then
+        if (Living.presence) then
+            log("There is presence in the living room")
+            Living.lights.turnOn()
+        end
+        if (Living.bright) then
+            log("It's getting bright, turning off lights")
+            Living.lights.turnOff()
+        end
     end
 end)
 
