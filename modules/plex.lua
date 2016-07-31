@@ -16,8 +16,10 @@ end)
 
 if (clients["Chromecast"] ~= nil and clients["Chromecast"].status == "playing") then
     PlexTV.turnOn()
+    PlexTV.changed = true
 else
     PlexTV.turnOff()
+    PlexTV.changed = true
 end
 
 return {

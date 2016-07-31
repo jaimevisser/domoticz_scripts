@@ -27,10 +27,3 @@ Living.lux.whenChanged(function()
         end
     end
 end)
-
-PlexTV.whenChanged(function()
-    log("Plex changed!")
-    if (Living.lights.on) then
-        Living.lights.turnOn()
-    end
-end)

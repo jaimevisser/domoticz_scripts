@@ -52,3 +52,9 @@ else
     log("Probably nobody present")
 end
 
+PlexTV.whenChanged(function()
+    log("Plex changed!")
+    if (Living.lights.on) then
+        Living.lights.turnOn()
+    end
+end)
