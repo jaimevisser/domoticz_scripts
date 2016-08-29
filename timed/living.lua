@@ -8,5 +8,5 @@ end
 
 if (Living.lights.on and Living.lastupdate == Living.timeout and not Living.presence) then
     log("nobody in the living for " .. Living.timeout .. "s")
-    Living.lights.turnOff()
+    --Living.lights.turnOff()
 end
