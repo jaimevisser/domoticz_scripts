@@ -3,8 +3,7 @@ scriptname = "E.KITCHENETTE"
 local kitchenette_door = Switch("Bijkeuken Deursensor")
 
 kitchenette_door.whenOn(function()
-    local sun = Sensor('Weer Centrum - Zon')
-    if (sun.value < 150) then
+    if (Living.dark) then
         local kitchenette_light = Switch('Bijkeuken Licht')
         kitchenette_light.turnOn()
     end
