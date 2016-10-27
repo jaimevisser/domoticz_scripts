@@ -1,4 +1,4 @@
-scriptname = "E.Toilet"
+scriptname = "E.TOILET"
 
 local detector = Switch("WC Sensor")
 
