@@ -11,6 +11,7 @@ Plex = require('modules/plex')
 
 require('common/living')
 require('events/bathroom')
+require('events/toilet')
 require('events/kitchenette')
 require('events/living')
 
