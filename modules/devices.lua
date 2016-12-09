@@ -59,6 +59,12 @@ function Sensor(a)
 
     sensor.value = {}
 
+    if(otherdevices_svalues[a] == nil) then
+        sensor.value = 0
+        log("ERROR! '" .. a .. "' does not contain any data!")
+        return sensor
+    end
+
     string.gsub(otherdevices_svalues[a], "([0-9.]+)", function(s)
         sensor.value[i] = tonumber(s)
         i = i + 1
