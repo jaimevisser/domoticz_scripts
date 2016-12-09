@@ -46,12 +46,6 @@ Living.presence = Living.detectors.on or PlexTV.on or
 Living.dark = Living.lux.value < 50
 Living.bright = Living.lux.value > 90
 
-if (Living.presence) then
-    log("Probably people present")
-else
-    log("Probably nobody present")
-end
-
 PlexTV.whenChanged(function()
     log("Plex changed!")
     if (Living.lights.on) then
